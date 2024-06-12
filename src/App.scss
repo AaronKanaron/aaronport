@@ -12,9 +12,9 @@
     gap: 0;
     // align-items: end;
     font-family: 'Montserrat', sans-serif;
-    * {
-        z-index: 1;
-    }
+    // * {
+    //     z-index: 1;
+    // }
     &__container {
         margin: 1rem 0;
     }
@@ -33,7 +33,7 @@
         letter-spacing: -0.5px;
         line-height: 4rem;
     }
-
+    
     .name {
         margin: 0 0; padding: 0;
         line-height: 4rem;
@@ -41,5 +41,26 @@
         color: black;
         text-transform: uppercase;
         font-family: 'Qaila', sans-serif;
+        position: relative;
+        // mix-blend-mode: difference;
+        // -webkit-text-stroke: 1px black;
+
+        // &::before{
+        //     content: 'Aaron';
+        //     position: absolute;
+        //     color: white;
+        //     height: 0.5rem;
+        //     background-color: white;
+        //     margin-top: 0.5rem;
+        // }
+
+        // &:after{
+        //     content: 'Aaron';
+        //     position: absolute;
+        //     color: white;
+        //     height: 0.5rem;
+        //     background-color: white;
+        //     margin-top: 0.5rem;
+        // }
     }
 }

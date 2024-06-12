@@ -3,7 +3,7 @@ import './App.scss';
 import Header from './components/molecules/header';
 import Cursor from './components/atoms/cursor';
 import CanvasComponent from './components/atoms/canvas';
-import SVGmorph from './components/atoms/svgmorph';
+import SVGMask from './components/atoms/svgmorph';
 
 function App() {
   return (
@@ -19,8 +19,8 @@ function App() {
       </section>
 
       {/* <Cursor /> */}
-      <CanvasComponent />
       {/* <SVGmorph /> */}
+      <CanvasComponent />
       {/* <SVGMask /> */}
     </div>
   );
