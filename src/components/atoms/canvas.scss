@@ -1,0 +1,68 @@
+.canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -3;
+    // width: 100%;
+    // height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    canvas{
+        // width: 100%;
+        // height: 100%;
+    }
+}
+
+.mask{
+    position: absolute;
+    // z-index: 1;
+    background: white;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    mix-blend-mode: screen;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .svgcontainer{
+        // width: 50%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+        cursor: pointer;
+        z-index: 10;
+
+        transition: transform 1s ease-in-out;
+
+        &.open{
+            // position: absolute;
+            transform: scale(50);
+        }
+
+        svg{
+            // position: absolute;
+            // width: 90%;
+            // position: absolute;
+            // top: 50%;
+            // left: 50%;
+            // transform: translate(-50%, -50%);
+        }
+    }
+}
+
+// .mask{
+//     background-image: url("../../../public/mask.png");
+//     background-size: cover;
+//     position: absolute;
+//     height: 100vh;
+//     width: 100vw;
+//     top: 0;
+//     left: 0;
+//     z-index: -2;
+//     mix-blend-mode: screen;
+// }

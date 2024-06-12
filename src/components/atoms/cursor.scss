@@ -1,0 +1,29 @@
+.cursors {
+    // height: 100vh; 
+    // width: 100vw;
+    .cursor {
+        position: fixed;
+        height: 3rem; width: 3rem;
+        //radius gradient mask for cursor
+        mask-image: radial-gradient(circle farthest-side, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+        
+        border-radius: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        pointer-events: none;
+        background-color: white;
+        // background-image: radial-gradient(circle farthest-side, white 60%, black 70%);
+        top: 0;
+        left: 0;
+        z-index: 1000;
+
+        &.trail {
+            z-index: 999;
+            display: none;
+            background-color: rgba($color: #000000, $alpha: 0.5);
+        }
+    }
+}
+
+* {
+    // cursor: none;
+}

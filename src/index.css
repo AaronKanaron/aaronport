@@ -5,9 +5,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Montserrat', sans-serif;
+
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quicksand&family=Roboto:wght@100&display=swap');
+
+@font-face {
+  font-family: 'Qaila';
+  src: url(./assets/fonts/QailaDemoRegular-dr916.otf) format('opentype');
+  font-weight: normal;
+  font-style: normal;
 }
