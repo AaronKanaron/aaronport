@@ -44,8 +44,9 @@ header {
             height: 1rem;
             border: 1px solid black;
             box-sizing: border-box;
+            cursor: pointer;
 
-            &.special {
+            &.current {
                 background-color: black;
             }
         }
