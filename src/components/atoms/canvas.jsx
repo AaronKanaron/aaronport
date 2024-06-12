@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import * as ogl from "ogl";
 import './canvas.scss'
 
 const CanvasComponent = () => {
     const canvasRef = useRef(null);
     const glRef = useRef(null);
-
+    const [isCanvasReady, setIsCanvasReady] = useState(false);
     
 
     useEffect(() => {
@@ -60,13 +60,10 @@ const CanvasComponent = () => {
         const _size = [2048, 1638];
         const renderer = new ogl.Renderer({ dpr: 2 });
         const gl = renderer.gl;
-        const renderWidth = 800;
-        const renderHeight = 600;
         glRef.current = gl;
 
+        
         if (!canvasRef.current.children.length) {
-            gl.canvas.width = renderWidth;
-            gl.canvas.height = renderHeight;
             gl.canvas.style.width = `100%`;
             gl.canvas.style.height = `100%`;
             canvasRef.current.appendChild(gl.canvas);
@@ -77,14 +74,14 @@ const CanvasComponent = () => {
         const mouse = new ogl.Vec2(-1);
         const velocity = new ogl.Vec2();
         
+        const maxWidth = 400; // Set your desired maximum width
+        const maxHeight = 300; // Set your desired maximum height
 
         const resize = () => {
             const screenWidth = window.innerWidth;
             const screenHeight = window.innerHeight;
             const screenAspectRatio = screenWidth / screenHeight;
             
-            const maxWidth = 800; // Set your desired maximum width
-            const maxHeight = 600; // Set your desired maximum height
             
             let width = screenWidth * 0.5;
             let height = width / screenAspectRatio;
@@ -126,9 +123,9 @@ const CanvasComponent = () => {
         
 
         const flowmap = new ogl.Flowmap(gl, {
-            falloff: 0.5,
-            dissipation: 0.98,
-            alpha: 0.2,
+            falloff: 0.4, //size of the brush
+            dissipation: 0.98, //how fast return to original state 1 = no return
+            alpha: 0.5, //strength
         });
 
         // Triangle that includes -1 to 1 range for 'position', and 0 to 1 range for 'uv'.
@@ -146,9 +143,12 @@ const CanvasComponent = () => {
         });
 
         const img = new Image();
-        img.onload = () => (texture.image = img);
+        img.onload = () => {
+            texture.image = img
+            setIsCanvasReady(true);
+            };
         img.crossOrigin = 'Anonymous';
-        img.src = '/water.jpg';
+        img.src = '/waterxs.jpg';
 
         let a1, a2;
         const imageAspect = _size[1] / _size[0];
@@ -198,13 +198,13 @@ const CanvasComponent = () => {
             }
 
             const rect = gl.canvas.getBoundingClientRect();
-            const scaleX = renderWidth / rect.width;
-            const scaleY = renderHeight / rect.height;
+            const scaleX = maxWidth / rect.width;
+            const scaleY = maxHeight / rect.height;
 
             // Get mouse value in 0 to 1 range, with y flipped
             mouse.set(
-                (e.x - rect.left) * scaleX / renderWidth,
-                1.0 - (e.y - rect.top) * scaleY / renderHeight
+                (e.x - rect.left) * scaleX / maxWidth,
+                1.0 - (e.y - rect.top) * scaleY / maxHeight
             );
             // Calculate velocity
             if (!lastTime) {
@@ -241,6 +241,7 @@ const CanvasComponent = () => {
         
         const update = (t) => {
             requestAnimationFrame(update);
+
             // Reset velocity when mouse not moving
             if (!velocity.needsUpdate) {
                 mouse.set(-1);
@@ -258,10 +259,25 @@ const CanvasComponent = () => {
         };
     
         requestAnimationFrame(update);
+
+        // return () => {
+        //     window.removeEventListener("resize", resize);
+        //     if (isTouchCapable) {
+        //         window.removeEventListener("touchstart", updateMouse);
+        //         window.removeEventListener("touchmove", updateMouse);
+        //     } else {
+        //         window.removeEventListener("mousemove", updateMouse);
+        //     }
+        // }
     }, []);
-    
+    if (isCanvasReady) {
+        console.log("update has run");
+    }
     return (
         <>
+            {!isCanvasReady  && (
+                <h1 style={{color: 'white', zIndex: 1000, position: "absolute", top: 0, left: 0}}>LOADING</h1>
+            )}
             <div className="canvas" ref={canvasRef} />
             
         </>
