@@ -5,7 +5,6 @@ import './canvas.scss'
 const CanvasComponent = () => {
     const canvasRef = useRef(null);
     const glRef = useRef(null);
-    const [isCanvasReady, setIsCanvasReady] = useState(false);
     
 
     useEffect(() => {
@@ -142,13 +141,20 @@ const CanvasComponent = () => {
             magFilter: gl.LINEAR,
         });
 
+        const smallImg = new Image();
+        smallImg.onload = () => {
+            texture.image = smallImg
+        };
+        smallImg.crossOrigin = 'Anonymous';
+        smallImg.src = '/waterxxxs.jpg';
         const img = new Image();
         img.onload = () => {
             texture.image = img
-            setIsCanvasReady(true);
-            };
+        };
         img.crossOrigin = 'Anonymous';
         img.src = '/waterxs.jpg';
+
+        //console log the current image
 
         let a1, a2;
         const imageAspect = _size[1] / _size[0];
@@ -270,16 +276,10 @@ const CanvasComponent = () => {
         //     }
         // }
     }, []);
-    if (isCanvasReady) {
-        console.log("update has run");
-    }
+
     return (
         <>
-            {!isCanvasReady  && (
-                <h1 style={{color: 'white', zIndex: 1000, position: "absolute", top: 0, left: 0}}>LOADING</h1>
-            )}
             <div className="canvas" ref={canvasRef} />
-            
         </>
     );
 };

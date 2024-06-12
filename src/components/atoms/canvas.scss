@@ -15,10 +15,31 @@
     }
 }
 
+
+
+// .cover{
+//     position: absolute;
+//     z-index: -1;
+//     // background: #ffffff;
+//     height: 100vh;
+//     width: 100vw;
+//     top: 0;
+//     left: 0;
+//     display: flex;
+//     justify-content: start;
+//     align-items: end;
+
+//     svg{
+//         position: absolute;
+//         bottom: -22%;
+//         left: -1%;
+//     }
+// }
+
 .mask{
     position: absolute;
     z-index: -1;
-    background: white;
+    background: #ffffff;
     height: 100vh;
     width: 100vw;
     top: 0;
